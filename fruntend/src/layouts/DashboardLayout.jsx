@@ -1,14 +1,12 @@
+import React from 'react';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import DashboardPage from '../pages/DashboardPage';
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = () => {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 flex flex-col bg-gray-50">
-        <Header />
-        <main className="p-4 overflow-y-auto">{children}</main>
-      </div>
+      <DashboardPage />
     </div>
   );
 };

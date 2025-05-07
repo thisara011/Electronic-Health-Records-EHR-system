@@ -1,7 +1,8 @@
-import Dashboard from './pages/Dashboard';
+import React from 'react';
+import DashboardLayout from './layouts/DashboardLayout';
 
-function App() {
-  return <Dashboard />;
-}
+const App = () => {
+  return <DashboardLayout />;
+};
 
 export default App;
