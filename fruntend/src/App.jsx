@@ -1,8 +1,9 @@
-import React from 'react';
-import DashboardLayout from './layouts/DashboardLayout';
+import React from "react";
+import AppRoutes from "./routes";
 
-const App = () => {
-  return <DashboardLayout />;
-};
+function App() {
+  return <AppRoutes />;
+}
 
 export default App;
+
