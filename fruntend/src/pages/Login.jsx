@@ -1,21 +1,35 @@
 // src/pages/Login.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const recaptchaRef = useRef(null);
+
+  const handleCaptchaChange = (value) => {
+    setIsCaptchaVerified(!!value);
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    if (!isCaptchaVerified) {
+      setError("Please complete the reCAPTCHA verification");
+      return;
+    }
 
     if (email === "admin123@gmail.com" && password === "1234") {
       navigate("/dashboard");
     } else {
       setError("Invalid credentials. Try again.");
+      recaptchaRef.current?.reset();
+      setIsCaptchaVerified(false);
     }
   };
 
@@ -55,6 +69,14 @@ const Login = () => {
               </div>
             </div>
 
+            <div className="flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6LenPj0rAAAAADVaRUNLFp5Z2Q3b7wVjVhK3utIY"
+                onChange={handleCaptchaChange}
+              />
+            </div>
+
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <button
@@ -66,23 +88,22 @@ const Login = () => {
           </form>
 
           <div className="text-sm text-gray-600 space-y-1">
-          <p>Don’t have an account?</p>
-          <div className="flex flex-col gap-1">
-          <Link to="/register" className="text-blue-700 hover:underline font-medium">
-               Sign up as a Patient
-          </Link>
-          <Link to="/registerdoctor" className="text-blue-700 hover:underline font-medium">
-               Sign up as a Doctor
-         </Link>
-        </div>
-</div>
-
+            <p>Don't have an account?</p>
+            <div className="flex flex-col gap-1">
+              <Link to="/register" className="text-blue-700 hover:underline font-medium">
+                Sign up as a Patient
+              </Link>
+              <Link to="/registerdoctor" className="text-blue-700 hover:underline font-medium">
+                Sign up as a Doctor
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Right Side - Doctor Image */}
         <div className="hidden md:block w-full md:w-1/2 mt-10 md:mt-0">
           <img
-            src="/public/assets/doctor.png"
+            src="/assets/doctor.png"
             alt="Doctor Illustration"
             className="w-full max-w-md mx-auto"
           />
