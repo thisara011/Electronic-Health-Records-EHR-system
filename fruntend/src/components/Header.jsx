@@ -5,7 +5,7 @@ const Header = () => {
     <header className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
       {/* Logo + Name */}
       <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="MediLab Logo" className="h-8 w-8" />
+        <img src="/public/assets/logo.svg" alt="MediLab Logo" className="h-8 w-8" />
         <span className="text-xl font-bold text-purple-700">MediLab Hospital</span>
       </div>
 
