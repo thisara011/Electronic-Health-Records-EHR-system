@@ -5,6 +5,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import RegisterPatientPage from "../pages/RegisterPatient";
 import DoctorRegistration from "../pages/RegisterDoctor";
 import Home from "../pages/Home";
+import Appointment from "../pages/Appointment";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<DashboardLayout />} />
         <Route path="/register" element={<RegisterPatientPage />} />
         <Route path="/registerdoctor" element={<DoctorRegistration />} />
+        <Route path="/appointment" element={<Appointment />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -12,7 +13,7 @@ const Header = () => {
       {/* Navigation Links */}
       <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
         <a href="#" className="hover:text-purple-700">Home</a>
-        <a href="#" className="hover:text-purple-700">Appointment</a>
+        <Link to="/appointment" className="hover:text-purple-700">Appointment</Link>
         <a href="#" className="hover:text-purple-700">Service</a>
         <a href="#" className="hover:text-purple-700">About</a>
         <a href="#" className="hover:text-purple-700">Contact</a>
