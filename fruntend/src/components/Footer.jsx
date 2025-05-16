@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo + Name */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src="/logo.png" alt="Logo" className="h-8 w-8" />
+            <img src="/public/assets/logo.svg" alt="Logo" className="h-8 w-8" />
             <span className="font-bold text-purple-700 text-lg">MediLab Hospital</span>
           </div>
           <p className="text-sm text-gray-500">

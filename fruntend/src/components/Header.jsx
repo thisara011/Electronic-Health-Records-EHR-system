@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
       {/* Logo + Name */}
       <div className="flex items-center space-x-2">
-        <img src="/logo.png" alt="MediLab Logo" className="h-8 w-8" />
+        <img src="/public/assets/logo.svg" alt="MediLab Logo" className="h-8 w-8" />
         <span className="text-xl font-bold text-purple-700">MediLab Hospital</span>
       </div>
 
       {/* Navigation Links */}
       <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
         <a href="#" className="hover:text-purple-700">Home</a>
-        <a href="#" className="hover:text-purple-700">Appointment</a>
+        <Link to="/appointment" className="hover:text-purple-700">Appointment</Link>
         <a href="#" className="hover:text-purple-700">Service</a>
         <a href="#" className="hover:text-purple-700">About</a>
         <a href="#" className="hover:text-purple-700">Contact</a>

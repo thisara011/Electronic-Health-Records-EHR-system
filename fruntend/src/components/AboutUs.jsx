@@ -7,7 +7,7 @@ const AboutUs = () => {
         {/* Image */}
         <div className="flex-1">
           <img 
-            src="/about-img.png" 
+            src="/public/assets/sales.svg" 
             alt="About Us" 
             className="w-full max-w-md mx-auto"
           />

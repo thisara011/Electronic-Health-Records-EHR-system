@@ -21,12 +21,12 @@ const HeroSection = () => {
         {/* Right Image */}
         <div className="flex-1 flex justify-center gap-4">
           <img 
-            src="/hero-left.png" 
+            src="/public/assets/Vector.svg" 
             alt="Character Left" 
             className="w-40 md:w-48 lg:w-56"
           />
           <img 
-            src="/hero-right.png" 
+            src="/public/assets/Vector (1).svg" 
             alt="Character Right" 
             className="w-40 md:w-48 lg:w-56"
           />

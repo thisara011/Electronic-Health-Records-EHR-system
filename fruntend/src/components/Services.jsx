@@ -3,15 +3,15 @@ import React from 'react';
 const services = [
   {
     title: 'NEUROSCIENCES',
-    image: '/service1.png',
+    image: '/public/assets/Group.svg',
   },
   {
     title: 'NEUROSCIENCES',
-    image: '/service2.png',
+    image: '/public/assets/Group.svg',
   },
   {
     title: 'NEUROSCIENCES',
-    image: '/service3.png',
+    image: '/public/assets/Group.svg',
   },
 ];
 
