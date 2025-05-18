@@ -55,6 +55,16 @@ const Appointment = () => {
             <option>Gender</option>
             <option>Male</option>
             <option>Female</option>
+            <option>Non-binary</option>
+            <option>Transgender</option>
+            <option>Genderqueer</option>
+            <option>Agender</option>
+            <option>Bigender</option>
+            <option>Genderfluid</option>
+            <option>Two-Spirit</option>
+            <option>Intersex</option>
+            <option>Demiboy</option>
+            <option>Demigirl</option>
           </select>
           <input type="date" className="input" />
           <input type="time" className="input" />
@@ -62,6 +72,22 @@ const Appointment = () => {
             <option>Department Name</option>
             <option>Cardiology</option>
             <option>Neurology</option>
+            <option>Orthopedics</option>
+            <option>Pediatrics</option>
+            <option>Dermatology</option>
+            <option>Gastroenterology</option>
+            <option>Oncology</option>
+            <option>Psychiatry</option>
+            <option>Radiology</option>
+            <option>Urology</option>
+            <option>Ophthalmology</option>
+            <option>Gynecology</option>
+            <option>Endocrinology</option>
+            <option>Hematology</option>
+            <option>Infectious Diseases</option>
+            <option>Nephrology</option>
+            <option>Pulmonology</option>
+            <option>Rheumatology</option>
           </select>
           <input type="text" placeholder="Doctor Name" className="input" />
           <textarea placeholder="Address" className="input md:col-span-2 h-24"></textarea>
