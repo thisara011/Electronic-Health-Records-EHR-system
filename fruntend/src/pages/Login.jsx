@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { supabase } from '../config/supabaseClient';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Login = () => {
     setIsCaptchaVerified(!!value);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!isCaptchaVerified) {
@@ -24,10 +25,18 @@ const Login = () => {
       return;
     }
 
-    if (email === "admin123@gmail.com" && password === "1234") {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) throw error;
+
+      // Successful login
       navigate("/dashboard");
-    } else {
-      setError("Invalid credentials. Try again.");
+    } catch (error) {
+      setError(error.message);
       recaptchaRef.current?.reset();
       setIsCaptchaVerified(false);
     }
@@ -45,7 +54,7 @@ const Login = () => {
               <div className="mt-1 flex items-center border rounded-md px-3 py-2">
                 <span className="material-icons-outlined text-gray-400 mr-2">mail</span>
                 <input
-                  type="text"
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
