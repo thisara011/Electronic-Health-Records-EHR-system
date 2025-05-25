@@ -1,6 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from '../config/supabaseClient';
 
 export default function PatientRegistration() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    fullName: '',
+    userName: '',
+    password: '',
+    dateOfBirth: '',
+    gender: '',
+    entnactNumber: '',
+    email: '',
+    address: '',
+    emergencyContact: '',
+    preExistingConditions: '',
+    allergies: '',
+    currentMedications: '',
+    bloodGroup: '',
+    medicalHistory: '',
+    insuranceInfo: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      // First, create the user in Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (authError) throw authError;
+
+      // Then, store the additional user data in a separate table
+      const { data: profileData, error: profileError } = await supabase
+        .from('patient_profiles')
+        .insert([
+          {
+            user_id: authData.user.id,
+            full_name: formData.fullName,
+            user_name: formData.userName,
+            date_of_birth: formData.dateOfBirth,
+            gender: formData.gender,
+            entnact_number: formData.entnactNumber,
+            address: formData.address,
+            emergency_contact: formData.emergencyContact,
+            pre_existing_conditions: formData.preExistingConditions,
+            allergies: formData.allergies,
+            current_medications: formData.currentMedications,
+            blood_group: formData.bloodGroup,
+            medical_history: formData.medicalHistory,
+            insurance_info: formData.insuranceInfo
+          }
+        ]);
+
+      if (profileError) throw profileError;
+
+      // Registration successful
+      navigate('/login');
+    } catch (error) {
+      setError(error.message);
+      console.error('Error:', error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row bg-white">
       {/* Left Section: Content */}
@@ -18,92 +92,138 @@ export default function PatientRegistration() {
         {/* Heading */}
         <h2 className="text-5xl font-bold text-gray-900 mb-8 leading-tight">Patient Registration</h2>
         {/* Form */}
-        <form className="space-y-3 w-full max-w-xl">
+        <form onSubmit={handleSubmit} className="space-y-3 w-full max-w-xl">
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <input
             type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
             placeholder="Full Name"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
           />
           <input
             type="text"
+            name="userName"
+            value={formData.userName}
+            onChange={handleChange}
             placeholder="User Name"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
           />
           <input
             type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             placeholder="Password"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
           />
-          <div className="flex flex-col md:flex-row md:space-x-3">
-            <input
-              type="date"
-              placeholder="Date of Birth"
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 mb-3 md:mb-0 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-            />
-            <select
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Gender
-              </option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div className="flex flex-col md:flex-row md:space-x-3">
-            <input
-              type="text"
-              placeholder="Entnact Number"
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 mb-3 md:mb-0 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-            />
-          </div>
           <input
-            type="text"
-            placeholder="Residential Address"
+            type="date"
+            name="dateOfBirth"
+            value={formData.dateOfBirth}
+            onChange={handleChange}
+            placeholder="Date of Birth"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
+          />
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <input
+            type="text"
+            name="entnactNumber"
+            value={formData.entnactNumber}
+            onChange={handleChange}
+            placeholder="Entnact Number"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
           />
           <input
             type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            placeholder="Address"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
+          />
+          <input
+            type="text"
+            name="emergencyContact"
+            value={formData.emergencyContact}
+            onChange={handleChange}
             placeholder="Emergency Contact"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+            required
           />
           <input
             type="text"
-            placeholder="Pre-existing Conditions (e.g., diabetes, hypertension, asthma)"
+            name="preExistingConditions"
+            value={formData.preExistingConditions}
+            onChange={handleChange}
+            placeholder="Pre-existing Conditions"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
           />
           <input
             type="text"
-            placeholder="Allergies (e.g., penicillin, nuts, latex)"
+            name="allergies"
+            value={formData.allergies}
+            onChange={handleChange}
+            placeholder="Allergies"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
           />
           <input
             type="text"
-            placeholder="Current Medications (if any)"
+            name="currentMedications"
+            value={formData.currentMedications}
+            onChange={handleChange}
+            placeholder="Current Medications"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
           />
-          <div className="flex flex-col md:flex-row md:space-x-3">
-            <input
-              type="text"
-              placeholder="Blood Group"
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 mb-3 md:mb-0 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-            />
-            <input
-              type="text"
-              placeholder="Medical History Summary (optional)"
-              className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
-            />
-          </div>
           <input
             type="text"
-            placeholder="Insurance Provider & Policy Number (if applicable)"
+            name="bloodGroup"
+            value={formData.bloodGroup}
+            onChange={handleChange}
+            placeholder="Blood Group"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+          />
+          <input
+            type="text"
+            name="medicalHistory"
+            value={formData.medicalHistory}
+            onChange={handleChange}
+            placeholder="Medical History"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
+          />
+          <input
+            type="text"
+            name="insuranceInfo"
+            value={formData.insuranceInfo}
+            onChange={handleChange}
+            placeholder="Insurance Information"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-200 text-base"
           />
           <button
