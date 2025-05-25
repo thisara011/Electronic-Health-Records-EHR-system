@@ -21,8 +21,18 @@ const Header = () => {
 
       {/* Buttons */}
       <div className="space-x-3">
-        <button className="border border-purple-700 text-purple-700 px-4 py-1 rounded-full hover:bg-purple-50">Sign In</button>
-        <button className="bg-purple-700 text-white px-4 py-1 rounded-full hover:bg-purple-800">Sign Up</button>
+        <Link
+          to="/login"
+          className="border border-purple-700 text-purple-700 px-4 py-1 rounded-full hover:bg-purple-50 inline-block text-center"
+        >
+          Sign In
+        </Link>
+        <Link
+          to="/login"
+          className="bg-purple-700 text-white px-4 py-1 rounded-full hover:bg-purple-800 inline-block text-center"
+        >
+          Sign Up
+        </Link>
       </div>
     </header>
   );
