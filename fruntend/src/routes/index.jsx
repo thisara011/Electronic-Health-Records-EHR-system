@@ -6,6 +6,7 @@ import RegisterPatientPage from "../pages/RegisterPatient";
 import DoctorRegistration from "../pages/RegisterDoctor";
 import Home from "../pages/Home";
 import Appointment from "../pages/Appointment";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterPatientPage />} />
         <Route path="/registerdoctor" element={<DoctorRegistration />} />
         <Route path="/appointment" element={<Appointment />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
