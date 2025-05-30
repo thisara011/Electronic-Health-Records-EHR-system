@@ -6,6 +6,7 @@ import RegisterPatientPage from "../pages/RegisterPatient";
 import DoctorRegistration from "../pages/RegisterDoctor";
 import Home from "../pages/Home";
 import Appointment from "../pages/Appointment";
+import ViewPatientProfile from "../pages/PatientProfile";
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,8 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterPatientPage />} />
         <Route path="/registerdoctor" element={<DoctorRegistration />} />
         <Route path="/appointment" element={<Appointment />} />
+        <Route path="/profile" element={<ViewPatientProfile />} />
+
       </Routes>
     </Router>
   );
