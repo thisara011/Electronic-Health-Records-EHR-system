@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.11",
+    "lucide-react": "^0.525.0"
+  }
+}
