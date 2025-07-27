@@ -1,62 +1,109 @@
-# Electronic Health Records (EHR) System
+# MediTrack Health Hub
 
-## Project Overview
-This project addresses the real-world problem of inefficient management of medical records at local clinics, leading to delays in patient care and errors in treatment. The solution is a secure, accessible, and real-time Electronic Health Records (EHR) system, developed using Agile Scrum methodology.
+A comprehensive healthcare management platform designed for patients and medical professionals to streamline healthcare delivery and management.
 
-## Problem Statement
-Many healthcare providers suffer from outdated or fragmented patient information, resulting in poor healthcare delivery. Our goal is to centralize, secure, and streamline patient information management to improve efficiency and quality of care.
+## Features
 
-## Solution
-Develop a comprehensive EHR system that:
-- Integrates patient data securely
-- Enables real-time updates
-- Facilitates appointment scheduling
-- Tracks patient medical history
-- Manages billing information
+- **Patient Management**: Complete patient record management system
+- **Doctor Dashboard**: Comprehensive dashboard for healthcare providers
+- **Appointment Scheduling**: Efficient appointment booking and management
+- **Medical Records**: Secure medical record storage and access
+- **User Authentication**: Role-based authentication system
+- **Payment Processing**: Integrated payment management
+- **Messaging System**: Secure communication between patients and doctors
+- **Admin Panel**: Administrative controls and user management
 
-## Team Structure
-- **Scrum Master**: Facilitates the Agile process
-- **Product Owner**: Prioritizes business value
-- **Development Team**: Developers, Testers, UX/UI Designers
+## Tech Stack
 
-## Key Features (Epics)
-- Patient Information Management
-- Appointment Scheduling
-- Medical History Tracking
-- Billing and Invoicing Integration
-- Security and Compliance
-
-## Agile Methodology Approach
-- **Requirements Management**: PICs and Minimally Releasable Features (MRF) identified
-- **User Stories**: Broken down, sized using Planning Poker
-- **Sprint Planning**: Top priority user stories planned with acceptance criteria
-- **Prototyping**: Iterative sprint cycles, continuous feedback and adaptation
-
-## Example User Story
-> As a receptionist, I want to register new patients electronically so that their information is securely stored and easily accessible.
-
-## Acceptance Criteria Example
-- Verify that patient name, contact, and medical history fields are captured correctly.
-- Check that the system validates mandatory inputs.
-- Calculate storage utilization after patient data entry.
-- Verify secure database connection after registration.
-
-## Technologies Used
-- Frontend: [React.js / Angular / Vue.js]
-- Backend: [Node.js / Django / Flask]
-- Database: [MongoDB / PostgreSQL / MySQL]
-- Authentication: OAuth 2.0 / JWT
-- Hosting: AWS / Azure / On-premises
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Backend**: Supabase (Database & Authentication)
+- **State Management**: React Query (TanStack Query)
+- **Routing**: React Router DOM
+- **Form Handling**: React Hook Form with Zod validation
+- **Charts**: Recharts for data visualization
 
 ## Getting Started
-1. Clone the repository.
-2. Install dependencies.
-3. Run the backend server.
-4. Run the frontend application.
-5. Start building and testing the prototype!
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd meditrack-health-hub
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+Create a `.env.local` file in the root directory and add your Supabase configuration:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   └── widgets/        # Custom widgets
+├── contexts/           # React contexts
+├── hooks/              # Custom React hooks
+├── integrations/       # External service integrations
+├── lib/                # Utility functions
+├── pages/              # Application pages/routes
+└── ...
+```
+
+## Database Schema
+
+The project uses Supabase with the following main tables:
+- Users (patients, doctors, admins)
+- Appointments
+- Medical Records
+- Payments
+- Messages
+
+Database migrations are located in the `supabase/migrations/` directory.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'To https://github.com/thisara011/Electronic-Health-Records-EHR-system.git''Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
-This project is licensed under the MIT License.
 
----
+This project is proprietary software developed for healthcare management purposes.
 
+## Support
+
+For support and questions, please contact the development team.
